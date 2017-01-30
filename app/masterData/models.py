@@ -41,9 +41,9 @@ class country(db.Model):
     __tablename__ = 'country'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128))
-    alpha2 = db.Column(db.String(128))
-    alpha3 = db.Column(db.String(128))
+    name = db.Column(db.String())
+    alpha2 = db.Column(db.String())
+    alpha3 = db.Column(db.String())
     code = db.Column(db.Integer())
 
     subRegion_id = db.Column(db.Integer, db.ForeignKey('subRegion.id'))
@@ -52,14 +52,26 @@ class region(db.Model):
     __tablename__ = 'region'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128))
+    name = db.Column(db.String())
     code = db.Column(db.Integer())
 
 class subRegion(db.Model):
     __tablename__ = 'subRegion'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128))
+    name = db.Column(db.String())
     code = db.Column(db.Integer())
 
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
+
+class taskStatus(db.Model):
+    __tablename__ = 'taskStatus'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), unique=True)
+
+class strategyLevel(db.Model):
+    __tablename__ = 'strategyLevel'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), unique=True)

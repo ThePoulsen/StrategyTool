@@ -1,6 +1,6 @@
 ## -*- coding: utf-8 -*-
 from flask import Blueprint, session, render_template, url_for, jsonify, json, g, redirect, request
-from app.admin.services import loginRequired, requiredRole, errorMessage, successMessage, apiMessage, sijaxSuccess, sijaxError, sendMail
+from app.admin.services import loginRequired, requiredRole, errorMessage, successMessage, apiMessage, sendMail
 from forms import changePasswordForm, userForm, groupForm
 import requests
 from authAPI import authAPI

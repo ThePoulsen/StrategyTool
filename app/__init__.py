@@ -32,6 +32,8 @@ mail = Mail(app)
 ## Import models
 from app.admin.models import *
 from app.masterData.models import *
+from app.task.models import *
+from app.strategy.models import *
 
 # Flask-sijax
 Sijax(app)
