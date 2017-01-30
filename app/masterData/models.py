@@ -44,7 +44,7 @@ class country(db.Model):
     name = db.Column(db.String())
     alpha2 = db.Column(db.String())
     alpha3 = db.Column(db.String())
-    code = db.Column(db.Integer())
+    code = db.Column(db.Integer)
 
     subRegion_id = db.Column(db.Integer, db.ForeignKey('subRegion.id'))
 
@@ -53,14 +53,14 @@ class region(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
-    code = db.Column(db.Integer())
+    code = db.Column(db.Integer)
 
 class subRegion(db.Model):
     __tablename__ = 'subRegion'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
-    code = db.Column(db.Integer())
+    code = db.Column(db.Integer)
 
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
 
@@ -75,3 +75,25 @@ class strategyLevel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), unique=True)
+
+class responsibilityType(db.Model):
+    __tablename__ = 'responsibilityType'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), unique=True)
+
+class responsibilityObject(db.Model):
+    __tablename__ = 'responsibilityObject'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), unique=True)
+
+class responsibilityAssignment(db.Model):
+    __tablename__ = 'responsibilityAssignment'
+
+    id = db.Column(db.Integer, primary_key=True)
+    responsibilityObject_id = db.Column(db.Integer, db.ForeignKey('region.id'))
+    reference_id = db.Column(db.Integer)
+    responsibilityType_id = db.Column(db.Integer, db.ForeignKey('responsibilityType.id'))
+
+    user_id = db.Column(db.Integer)

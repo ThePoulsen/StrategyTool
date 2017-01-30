@@ -8,6 +8,10 @@ class mission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), unique=True)
     desc = db.Column(db.String())
+    currentMission = db.Column(db.Boolean)
+
+    start = db.Column(db.Integer, db.ForeignKey('calendar.id'))
+    end = db.Column(db.Integer, db.ForeignKey('calendar.id'))
 
 class vision(db.Model):
     __tablename__ = 'vision'
@@ -15,6 +19,19 @@ class vision(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), unique=True)
     desc = db.Column(db.String())
+    currentVision = db.Column(db.Boolean)
+
+    start = db.Column(db.Integer, db.ForeignKey('calendar.id'))
+    end = db.Column(db.Integer, db.ForeignKey('calendar.id'))
+
+class objective(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), unique=True)
+    desc = db.Column(db.String())
+
+    start = db.Column(db.Integer, db.ForeignKey('calendar.id'))
+    end = db.Column(db.Integer, db.ForeignKey('calendar.id'))
+    tenant_id = db.Column(db.Integer)
 
 class strategy(db.Model):
     __tablename__ = 'strategy'
@@ -22,12 +39,10 @@ class strategy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), unique=True)
     desc = db.Column(db.String())
-    year = db.Column(db.Integer)
-    responsible = db.Column(db.Integer)
+
     tenant_id = db.Column(db.Integer)
-    owner = db.Column(db.Integer)
 
-
-    implemented_by = db.Column(db.Integer, db.ForeignKey('calendar.id'))
-    parent = db.Column(db.Integer, db.ForeignKey('strategy.id'))
+    start = db.Column(db.Integer, db.ForeignKey('calendar.id'))
+    end = db.Column(db.Integer, db.ForeignKey('calendar.id'))
     strategyLevel_id = db.Column(db.Integer, db.ForeignKey('strategyLevel.id'))
+    objective_id = db.Column(db.Integer, db.ForeignKey('objective.id'))

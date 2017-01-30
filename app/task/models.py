@@ -8,8 +8,7 @@ class task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
     desc = db.Column(db.String())
-    initiator = db.Column(db.Integer)
-    responsible = db.Column(db.Integer)
+
     tenant_id = db.Column(db.Integer)
 
     taskStatus_id = db.Column(db.Integer, db.ForeignKey('taskStatus.id'))

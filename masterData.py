@@ -1,7 +1,7 @@
 ## -*- coding: utf-8 -*-
 import csv
 from app import db
-from app.masterData.models import weekDay, month, quarter, calendar, region, subRegion, country, taskStatus, strategyLevel
+from app.masterData.models import weekDay, month, quarter, calendar, region, subRegion, country, taskStatus, responsibilityType, responsibilityObject, strategyLevel
 
 weekDays = [('Monday','Mon','1'),
         ('Tuesday','Tue','2'),
@@ -33,6 +33,12 @@ taskStat = ['Not started','Started','On hold','Complete']
 
 stratLevel = ['Level 0','Level 1','Level 2','Level 3']
 
+respObject = ['Mission','Vision','Objective','Strategy','Project','Task','Task Initiator']
+
+respType = ['Owner','Support','Resources','Expertise']
+
+
+
 calData = csv.reader(open('calendar.csv','r'), delimiter=';')
 next(calData, None)
 
@@ -40,6 +46,14 @@ world = csv.reader(open('world.csv','r'))
 next(world, None)
 
 def createMasterData():
+    for obj in respObject:
+        if not responsibilityObject.query.filter_by(title=obj).first():
+            db.session.add(responsibilityObject(title=obj))
+
+    for typ in respType:
+        if not responsibilityType.query.filter_by(title=typ).first():
+            db.session.add(responsibilityType(title=typ))
+
     for stat in taskStat:
         if not taskStatus.query.filter_by(title=stat).first():
             db.session.add(taskStatus(title=stat))
