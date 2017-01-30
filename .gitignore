@@ -7,3 +7,4 @@
 /authAPI.py
 /env/
 /migrations/
+*.pyc
