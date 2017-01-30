@@ -97,3 +97,9 @@ class responsibilityAssignment(db.Model):
     responsibilityType_id = db.Column(db.Integer, db.ForeignKey('responsibilityType.id'))
 
     user_id = db.Column(db.Integer)
+
+class UOM(db.Model):
+    __tablename__ = 'UOM'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), unique=True)

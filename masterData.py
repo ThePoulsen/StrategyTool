@@ -1,7 +1,7 @@
 ## -*- coding: utf-8 -*-
 import csv
 from app import db
-from app.masterData.models import weekDay, month, quarter, calendar, region, subRegion, country, taskStatus, responsibilityType, responsibilityObject, strategyLevel
+from app.masterData.models import weekDay, month, quarter, calendar, region, subRegion, country, taskStatus, responsibilityType, responsibilityObject, strategyLevel, UOM
 
 weekDays = [('Monday','Mon','1'),
         ('Tuesday','Tue','2'),
@@ -37,7 +37,7 @@ respObject = ['Mission','Vision','Objective','Strategy','Project','Task','Task I
 
 respType = ['Owner','Support','Resources','Expertise']
 
-
+uom = ['Percent','Dollars','Euros','Index','Milestone','Days','Hours','Minutes']
 
 calData = csv.reader(open('calendar.csv','r'), delimiter=';')
 next(calData, None)
@@ -46,6 +46,10 @@ world = csv.reader(open('world.csv','r'))
 next(world, None)
 
 def createMasterData():
+    for unit in uom:
+        if not UOM.query.filter_by(title=unit).first():
+            db.session.add(UOM(title=unit))
+
     for obj in respObject:
         if not responsibilityObject.query.filter_by(title=obj).first():
             db.session.add(responsibilityObject(title=obj))
