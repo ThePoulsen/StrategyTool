@@ -1,7 +1,7 @@
 ## -*- coding: utf-8 -*-
 import csv
 from app import db
-from app.masterData.models import weekDay, month, quarter, calendar, region, subRegion, country, taskStatus, responsibilityType, responsibilityObject, strategyLevel, UOM
+from app.masterData.models import weekDay, month, quarter, calendar, region, subRegion, country, taskStatus, responsibilityType, responsibilityObject, strategyLevel, UOM, measurementFrequency, actionStatus, processType, indicatorType
 
 weekDays = [('Monday','Mon','1'),
         ('Tuesday','Tue','2'),
@@ -29,7 +29,9 @@ quarters = [('Q1','1'),
             ('Q3','3'),
             ('Q4','4')]
 
-taskStat = ['Not started','Started','On hold','Complete']
+taskStat = ['Not started','In progress','On hold','Complete']
+
+actionStat = ['Planned but not started','Late','In progress','Complete','Cancelled']
 
 stratLevel = ['Level 0','Level 1','Level 2','Level 3']
 
@@ -39,6 +41,12 @@ respType = ['Owner','Support','Resources','Expertise']
 
 uom = ['Percent','Dollars','Euros','Index','Milestone','Days','Hours','Minutes']
 
+measurementFreq = ['Weekly','Monthly','Quarterly']
+
+processTyp = ['Safety','Quality','Delivery','Cost','Productivity']
+
+indicatorTyp = ['KPI','PPI','PI','KRI']
+
 calData = csv.reader(open('calendar.csv','r'), delimiter=';')
 next(calData, None)
 
@@ -46,6 +54,22 @@ world = csv.reader(open('world.csv','r'))
 next(world, None)
 
 def createMasterData():
+    for p in processTyp:
+        if not processType.query.filter_by(title=p).first():
+            db.session.add(processType(title=p))
+
+    for t in indicatorTyp:
+        if not indicatorType.query.filter_by(title=t).first():
+            db.session.add(indicatorType(title=t))
+
+    for mf in measurementFreq:
+        if not measurementFrequency.query.filter_by(title=mf).first():
+            db.session.add(measurementFrequency(title=mf))
+
+    for st in actionStat:
+        if not actionStatus.query.filter_by(title=st).first():
+            db.session.add(actionStatus(title=st))
+
     for unit in uom:
         if not UOM.query.filter_by(title=unit).first():
             db.session.add(UOM(title=unit))

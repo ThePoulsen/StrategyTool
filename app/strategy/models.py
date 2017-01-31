@@ -10,6 +10,8 @@ class mission(db.Model):
     desc = db.Column(db.String())
     currentMission = db.Column(db.Boolean)
 
+    tenant_id = db.Column(db.Integer)
+
     start = db.Column(db.Integer, db.ForeignKey('calendar.id'))
     end = db.Column(db.Integer, db.ForeignKey('calendar.id'))
 
@@ -21,17 +23,22 @@ class vision(db.Model):
     desc = db.Column(db.String())
     currentVision = db.Column(db.Boolean)
 
+    tenant_id = db.Column(db.Integer)
+
     start = db.Column(db.Integer, db.ForeignKey('calendar.id'))
     end = db.Column(db.Integer, db.ForeignKey('calendar.id'))
+    mission_id = db.Column(db.Integer, db.ForeignKey('mission.id'))
 
 class objective(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), unique=True)
     desc = db.Column(db.String())
 
+    tenant_id = db.Column(db.Integer)
+
     start = db.Column(db.Integer, db.ForeignKey('calendar.id'))
     end = db.Column(db.Integer, db.ForeignKey('calendar.id'))
-    tenant_id = db.Column(db.Integer)
+    vision_id = db.Column(db.Integer, db.ForeignKey('vision.id'))
 
 class strategy(db.Model):
     __tablename__ = 'strategy'

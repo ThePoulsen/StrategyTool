@@ -100,6 +100,34 @@ class responsibilityAssignment(db.Model):
 
 class UOM(db.Model):
     __tablename__ = 'UOM'
+    __table_args__ = (db.UniqueConstraint('title', 'abbr', name='_title_abbr'),)
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String())
+    abbr = db.Column(db.String())
+
+class actionStatus(db.Model):
+    __tablename__ = 'actionStatus'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), unique=True)
+
+class measurementFrequency(db.Model):
+    __tablename__ = 'measurementFrequency'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), unique=True)
+
+class processType(db.Model):
+    __tablename__ = 'processType'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), unique=True)
+    desc = db.Column(db.String())
+
+class indicatorType(db.Model):
+    __tablename__ = 'indicatorType'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(), unique=True)
+    desc = db.Column(db.String())

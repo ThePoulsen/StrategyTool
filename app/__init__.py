@@ -36,6 +36,7 @@ from app.task.models import *
 from app.strategy.models import *
 from app.project.models import *
 from app.organization.models import *
+from app.performance.models import *
 
 # Flask-sijax
 Sijax(app)

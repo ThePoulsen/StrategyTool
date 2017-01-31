@@ -10,4 +10,5 @@ class organization(db.Model):
     head = db.Column(db.Integer)
 
     tenant_id = db.Column(db.Integer)
+
     parent = db.Column(db.Integer, db.ForeignKey('organization.id'))
